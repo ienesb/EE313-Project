@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc, }
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{circuitikz}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+    pdftitle={EE313 Proposal Report}
+}
+\onehalfspacing
+
+\author{İsmail Enes Bülbül, Ahmet Caner Akar}
+\date{December 2022}
+\renewcommand*\contentsname{Table of Contents}
+\renewcommand*{\refname}{}
+\begin{document}
+\newpage
+
+    \tableofcontents
+    \newpage
+    \section{Introduction}
+
+    \begin{center}
+    \begin{circuitikz}[american voltages]
+    \draw
+        (0,0) to [short, *-] (6,0)
+        to [V, l_=$\mathrm{j}{\omega}_m \underline{\psi}^s_R$] (6,2) 
+        to [R, l_=$R_R$] (6,4) 
+        to [short, i_=$\underline{i}^s_R$] (5,4) 
+        (0,0) to [open, v^>=$\underline{u}^s_s$] (0,4) 
+        to [short, *- ,i=$\underline{i}^s_s$] (1,4) 
+        to [R, l=$R_s$] (3,4)
+        to [L, l=$L_{\sigma}$] (5,4) 
+        to [short, i_=$\underline{i}^s_M$] (5,3) 
+        to [L, l_=$L_M$] (5,0); 
+    \end{circuitikz}
+    \end{center}
+
+
+\end{document}
