@@ -48,8 +48,11 @@ Component not allowed to be used: audio op-amps, microphone with integrated driv
 \section{Transmitter Unit}
 \subsection{Microphone Driver}
 The first part of the transmitter unit is microphone driver circuit. To transmit an audio signal using a laser, we need to detect this audio signal first. Therefore, to do this we used an electret microphone. It requires a biasing voltage to operate. Thus, we biased the microphone by connecting the positive terminal of it to the 1 k\(\Omega\) resistor. However, since the output voltage of the microphone is quite low, we cannot directly connect it to the rest of the circuit. In order to use this output, first, we should amplify it with a non-inverting amplifier circuit as shown in Figure 2. \\ \par
-There is a 10 k\(\Omega\) potentiometer connected between ground and the inverting input of the amplifier so that by changing its value, the gain can be adjusted, and the amplitude of the output signal is changed. The gain of the topology can be found by the following expression, Gain = (R\(_3\)+R\(_4\))/R\(_4\). 
-Also, the simulation result of the input-output characteristics of the microphone driving circuit in LTspice is given in Figure 3 when R\(_4\) = 10k\(\Omega\). \\ \par
+There is a 10 k\(\Omega\) potentiometer connected between ground and the inverting input of the amplifier so that by changing its value, the gain can be adjusted, and the amplitude of the output signal is changed. The gain of the topology can be found by the following expression (1).
+\begin{equation}\label{eq:1}
+        Gain, A_v = \frac{R_3+R_4}{R_4} 
+ \end{equation}
+\par Also, the simulation result of the input-output characteristics of the microphone driving circuit in LTspice is given in Figure 3 when R\(_4\) = 10k\(\Omega\). \\ \par
 After non-inverting amplifier circuit, we connected a buffer circuit so that the microphone driver will not be affected from the rest of the circuit. 
 \subsection{Automatic Gain Control}
 The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. To achieve this, we construct the AGC circuit which can be seen in Figure 4.
