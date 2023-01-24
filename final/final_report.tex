@@ -52,14 +52,18 @@ There is a 10 k\(\Omega\) potentiometer connected between ground and the inverti
 Also, the simulation result of the input-output characteristics of the microphone driving circuit in LTspice is given in Figure 3 when R\(_4\) = 10k\(\Omega\). \\ \par
 After non-inverting amplifier circuit, we connected a buffer circuit so that the microphone driver will not be affected from the rest of the circuit. 
 \subsection{Automatic Gain Control}
-The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. 
+The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. To achieve this, we construct the AGC circuit which can be seen in Figure 4.
+\subsection{Low-Pass Filter}
+\subsection{Summing Amplifier}
+Before transmitting the audio signal, we are going to add another signal namely reference signal so that at the receiver side, the amplitude of this signal will be treated as the measure of signal strength since it is constant. To sum up these two signals, we used a basic summing amplifier circuit which can be seen in Figure x. 
+\subsection{Laser Driver}
 \section{Receiver Unit}
 \subsection{Photodiode}
-\subsection{LPF}
-\subsection{HPF}
-\subsection{peak detector}
-\subsection{comparator}
-\subsection{audio amplifier}
+\subsection{Low-Pass Filter}
+\subsection{High-Pass Filter}
+\subsection{Improved Peak Detector}
+\subsection{Comparator}
+\subsection{Audio Amplifier}
 
 
 \section{Conclusion}
