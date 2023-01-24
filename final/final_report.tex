@@ -59,10 +59,12 @@ The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We 
 \subsection{Low-Pass Filter}
 \subsection{Summing Amplifier}
 Before transmitting the audio signal, we are going to add another signal namely reference signal so that at the receiver side, the amplitude of this signal will be treated as the measure of signal strength since it is constant. To sum up these two signals, we used a basic summing amplifier circuit which can be seen in Figure x. \\
-\par For the summing amplifier the output expression can be given as by the following equation (2). 
+\par For the summing amplifier the output expression can be given as by the following equation (2). The output voltage has \(180^\circ\) phase shift since the audio and reference signals are given from the inverting input of the op-amp.  
 \begin{equation}\label{eq:2}
-         V_{out} = \frac{R_3}{R_1} \mbox{(Audio\textunderscore signal)} + \frac{R_3}{R_2} \mbox{(Reference\textunderscore signal)}
+         V_{out} = -\frac{R_3}{R_1} \mbox{(Audio\textunderscore signal)} - \frac{R_3}{R_2} \mbox{(Reference\textunderscore signal)}
  \end{equation}
+ \par The simulation result of the summing amplifier in LTspice is shown in Figure x. \\
+ \par In this summing amplifier we did not use a regular op-amp such as LM741 or UA741. Since we are working with high frequencies we had to use an opamp with higher slew-rate for better response. Thus, we used an LF351 opamp which has a slew rate of 16V/\(\mu\)s [x] whereas LM741 and UA741 op-amps has a slew rate of 0.5V/\(\mu\)s [x][x].
 \subsection{Laser Driver}
 \section{Receiver Unit}
 \subsection{Photodiode}
