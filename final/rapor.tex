@@ -1,0 +1,547 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc, }
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{float}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+    pdftitle={EE300 İsmail Enes Bülbül}
+}
+\onehalfspacing
+
+
+
+% \title{EE230 Homework-1}
+\author{İsmail Enes Bülbül}
+\date{October 2022}
+\renewcommand*\contentsname{Table of Contents}
+\renewcommand*{\refname}{}
+\begin{document}
+% \maketitle
+% \tableofcontents
+\newpage
+
+\begin{titlepage}
+    \begin{center}
+
+
+        % \vspace{1cm}
+        \includegraphics[width=0.7\textwidth]{logo.jpg}  \\
+        % \vspace{1cm}  
+        \Huge
+        \textbf{MIDDLE EAST TECHNICAL UNIVERSITY}
+            
+            
+        \vspace{1.5cm}
+        \LARGE    
+        \textbf{ELECTRICAL - ELECTRONICS ENGINEERING}
+        \vspace{1.5cm}
+            
+        \textbf{EE300 SUMMER PRACTICE REPORT}
+            
+        \vfill
+            
+            
+        \vspace{0.8cm}
+            
+        
+            
+        \normalsize
+        \begin{flushleft}        
+        \textbf{Student Name:} İsmail Enes Bülbül \\
+        \textbf{Student ID:} 2442630\\
+        \textbf{SP Company:} InterLabs İleri Ar-Ge Uzay Havacılık ve Bilişim Teknolojileri A.Ş.\\
+        \textbf{SP Date:} 05.09.2022-30.09.2022\\ 
+        \textbf{Supervisor Name:} Barış Canatan\\ 
+        \textbf{Supervisor Email:} baris.canatan@interlabs.com.tr\\ 
+        \textbf{Supervisor Signature:} \\    
+        \end{flushleft}
+
+    \end{center}
+\end{titlepage}
+
+    \tableofcontents
+    \newpage
+
+    \section{Introduction}
+    
+    I started my summer practice on 05.09.2022 and completed it on 
+    30.09.2022 in InterLabs İleri Ar-Ge Uzay Havacılık ve 
+    Bilişim Teknolojileri A.Ş. in Ankara. I worked in Signal Processing 
+    department and my supervisor was Barış Canatan who is an electronics 
+    engineer working in this department. \\
+    In the first week of my summer practice, I studied Kalman Filter and EKF. 
+    I did some exercises to gain intuition about Kalman Filter. 
+    In the second week, I implemented a method to estimate the distance from 
+    RSSI measurements by using Kalman Filter. In the last two weeks, I used EKF to 
+    estimate orientation and position by using inertial measurements.
+
+    \section{Description of the Company}
+
+    \subsection{Company Name}
+    InterLabs İleri Ar-Ge Uzay Havacılık ve Bilişim Teknolojileri A.Ş.
+
+    \subsection{Company Location}
+    \textbf{Address:} Söğütözü Caddesi, Koç Kuleleri A Blok, No:47, 
+    Çankaya-Ankara/Türkiye\\
+    \textbf{Phone:} +90 312 225 10 93
+
+    \subsection{General Description of the Company}
+    InterLabs was the R\&D department of InterProbe corporation, and was established 
+    as a spin-off company in R\&D. InterProbe focused on cyber security and cryptography 
+    in Pavo Group. \\
+    Interlabs has 40 employees of which 25 are electronics engineers. The company has 4 
+    departments which are Signal Processing, Computer Vision, UAV Systems, and 
+    Software Development. \\
+    \textbf{Signal Processing:} The department is currently focused on 
+    Signals of Opportunity (SoOp) systems. SoOp can be defined as positioning 
+    methods without using GPS signals.\\
+    \textbf{Computer Vision:} The department is focused on developing 
+    face-recognition algorithms for CCTVs.\\
+    \textbf{UAV Systems:} The department is focused on developing swarm 
+    algorithms for UAV systems.\\
+    \textbf{Software Development:} The department works with other departments 
+    to meet their programming requirements. 
+
+    \section{First Week}    
+    In the first week, I study Kalman Filter since it is a commonly used 
+    algorithm in control applications. I also did some examples to apply 
+    Kalman Filter and gain intuition.
+
+    \subsection{Kalman Filter}
+    Kalman Filter is used to reduce the noise of the measurements and 
+    combine several measurements. We can also use it to estimate some 
+    states which we cannot measure directly. 
+    Kalman Filter has two phases which are prediction and measurement. 
+    In the prediction phase, we try to predict the state in the future by using 
+    the current estimates. We can model this phase as (1).
+
+    \begin{equation}\label{eq:1}
+        x_{k+1} = Fx_k + w_k
+    \end{equation}
+    In (1), \(x_k\) represents the state vector at time \(k\), \(F\) 
+    represents the transition matrix which is used to predict state vector 
+    at time \(k+1\), and \(w\) is zero-mean gaussian noise which represents 
+    uncertainties of the system. \\
+    In the measurement phase, we use both predictions and measurements to 
+    obtain a better estimate. We can model this as (2).
+    \begin{equation}\label{eq:2}
+        z_k = Hx_k + v_k
+    \end{equation}
+    In (2), \(z_k\) is the measurement vector, \(H\) is the observation matrix,
+    and \(v_k\) is a zero-mean gaussian noise which represents uncertainties 
+    in the system. \\
+    In both phases, we also try to determine the covariance matrices of 
+    the state variables. Lastly, we need to calculate Kalman gain. 
+    Kalman gain is used in the measurement phase to determine the balance 
+    between measurements and predictions. All 5 equations used in Kalman 
+    Filter can be derived as (3-7) \cite{kalman}.
+    \begin{equation}\label{eq:3}
+        x^{p}_{k+1} = Fx^{e}_k
+    \end{equation}
+    \begin{equation}\label{eq:4}
+        P^{p}_{k} = FP^{e}_{k-1}F^T + Q_{k-1}
+    \end{equation}
+    \begin{equation}\label{eq:5}
+        K_k = P^p_kH^T(HP^p_kH^T + R_k)^{-1}	
+    \end{equation}
+    \begin{equation}\label{eq:6}
+        x^{e}_{k} = x^{p}_k + K_k(z_k - Hx^p_k)	
+    \end{equation}
+    \begin{equation}\label{eq:7}
+        P^{e}_{k} = (I - K_kH)P^p_k	
+    \end{equation}
+    In (3-7), subscripts represent time, superscripts represent whether the 
+    variable is estimated or predicted, \(P\) represents the covariance matrix 
+    of \(x\), \(Q\) and \(R\) represent the covariance matrices of \(w_k\) and 
+    \(v_k\) respectively, and \(K\) represents Kalman gain. \\
+    First, (3-4) is used to predict the state vector and its covariance matrix. 
+    Then (5) is used to calculate Kalman gain. Lastly, (6-7) is used to 
+    estimate the state vector and its covariance matrix by using measurements. 
+
+    \subsection{Extended Kalman Filter (EKF)}
+    EKF is another version of Kalman Filter where the prediction and 
+    measurement phases have nonlinear functions. These phases can 
+    be modeled as (8-9).
+    \begin{equation}\label{eq:8}
+        x_{k+1} = f(x_k) + w_k
+    \end{equation}
+    \begin{equation}\label{eq:9}
+        z_k = h(x_k) + v_k
+    \end{equation}
+    We can use these nonlinear functions to predict and estimate 
+    the state variables. However, we cannot determine the covariance 
+    matrices and Kalman gain. To do this, we need to calculate their 
+    jacobian matrices to linearize these functions. As a result, 
+    we can derive EKF equations as (10-14) \cite{ekf}.
+    \begin{equation}\label{eq:10}
+        x^{p}_{k+1} = f(x^{e}_k)
+    \end{equation}
+    \begin{equation}\label{eq:11}
+        P^{p}_{k} = J_fP^{e}_{k-1}J_f^T + Q_{k-1}
+    \end{equation}
+    \begin{equation}\label{eq:12}
+        K_k = P^p_kJ_h^T(J_hP^p_kJ_h^T + R_k)^{-1}	
+    \end{equation}
+    \begin{equation}\label{eq:13}
+        x^{e}_{k} = x^{p}_k + K_k(z_k - h(x^p_k))	
+    \end{equation}
+    \begin{equation}\label{eq:14}
+        P^{e}_{k} = (I - K_kJ_h)P^p_k	
+    \end{equation}
+    In (11,12,14), \(J_f\) represents the first jacobian of \(f\) with 
+    respect to thestate vector and \(J_h\) represents the first jacobian 
+    of \(h\) with respect to the state vector.
+
+    \section{Second Week}
+    In the second week, I researched distance estimation methods using 
+    Received Signal Strength Indication (RSSI) measurement of a 
+    received signal. RSSI measurement is related to the power of the 
+    received signal. The relation between the RSSI value and the distance 
+    between the source of the signal and the receiver can be defined 
+    as (15) \cite{logmodel}.
+    \begin{equation}\label{eq:15}
+        RSSI = 10nlog_{10}d + A
+    \end{equation}
+    In (15), \(d\) represents the distance, and \(n\) and \(A\) are tuned to 
+    fit the environment. Although we can obtain a distance estimation by 
+    using (15), it can be inaccurate due to multipath effect. 
+    Multipath effect can be defined as receiving one signal by several 
+    paths due to reflection or refraction. This can make the received signals 
+    attenuated or amplificated unexpectedly. To reduce multipath effect 
+    and obtain a better distance estimation, I tried to implement the method 
+    proposed in \cite{shue} that uses Kalman Filter.
+
+    \subsection{Method Description}
+    The state vector consists of the distance and velocity of the receiver. 
+    To predict the state vector at time \(k+1\), (16,17) is used.
+    \begin{equation}\label{eq:16}
+        d_{k+1} = d_{k} + \Delta t v_{k}
+    \end{equation}
+    \begin{equation}\label{eq:17}
+        v_{k+1} = v_{k}
+    \end{equation}
+    In (16), the Euler method is used to predict distance, and in (17), velocity 
+    is assumed to be constant. \\
+    The measurement vector consists of RSSI measurements. In the measurement phase, 
+    the measurement is converted to distance by using (15).\\
+    F and H matrices can be calculated as (18).
+    \begin{equation}\label{eq:18}
+        F = 
+        \begin{bmatrix}
+            1 & \Delta t\\
+            0 & 1
+        \end{bmatrix}\;\;\;
+        H = 
+        \begin{bmatrix}
+            1 & 0
+        \end{bmatrix}
+    \end{equation}
+    \subsection{Simulations}
+
+    \subsubsection{Simulation Environment}
+    In order to test the method, I generated some RSSI data in MATLAB. 
+    To do so, I adjusted n to 3 and A to 30 in (15). 
+    Then I added zero-mean gaussian noise to the generated RSSI values. I also 
+    added gaussian noises with non-zero mean at some points. 
+    The graph of RSSI vs Distances of the generated dataset is plotted 
+    in Fig. 1.
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{rssivsdistance}}
+        \caption{The graph of generated RSSI data}
+    \end{figure}
+
+    \subsubsection{Simulation Results}
+    I implemented the method by using the dataset generated. For comparison, 
+    I also used (15) to obtain distance estimations. The results are 
+    plotted in Fig. 2.
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{rssiResults}}
+        \caption{The results of simulation}
+    \end{figure}
+    From Fig. 2, we can see that by using Kalman Filter, we can reduce 
+    the multipath effect and obtain a better distance estimation by using 
+    the RSSI measurements.
+
+    \section{Third and Fourth Week}   
+    In the rest of my summer practice, I researched orientation and position 
+    estimation methods using inertial measurements only. By doing this, I 
+    learned how IMU measurements are modeled, 
+    orientation representation methods, and coordinate systems.
+    \subsection{Inertial Measurement Unit (IMU)}
+    IMU consists of three units which are accelerometer, gyroscope, and 
+    magnetometer. 
+
+    \subsubsection{Accelerometer}
+    Accelerometer measures the acceleration of the device in the body frame. 
+    It measures acceleration by measuring the force acting on the device. 
+    Therefore, the measurement involves gravitational acceleration whether 
+    the device is falling freely or not. The measurement can be modeled as (19) \cite{kok}.
+    \begin{equation}\label{eq:19}
+        y_{accelerometer} = a_{body} - g_{body} + w
+    \end{equation}
+    In (19), \(y\) is the reading of the accelerometer, \(a\) is the acceleration of the device 
+    in the body frame, \(g\) is the gravitational acceleration in the body frame 
+    and \(w\) represents the noise in the measurement.
+
+    \subsubsection{Gyroscope}
+    Gyroscope measures the angular velocity of the device. The measurement involves 
+    the earth's rotation. However, it is too small compared to the angular velocity 
+    of the device with respect to the earth. Therefore, we can neglect the earth's 
+    rotation. The measurement can be modeled as (20) \cite{kok}.
+    \begin{equation}\label{eq:20}
+        y_{gyroscope} = \omega_{body} + w
+    \end{equation}
+    In (20), \(y\) is the reading of the gyroscope, \(\omega\) is the angular velocity of the 
+    device in the body frame and \(w\) represents the noise in the measurement.
+
+    \subsubsection{Magnetometer}
+    Magnetometer measures the magnetic field in the body frame. We assume that the 
+    magnetometer is calibrated, therefore it can be used to measure the earth's 
+    magnetic field. The measurement can be modeled as (21) \cite{kok}.
+    \begin{equation}\label{eq:21}
+        y_{magnetometer} = m_{body} + w
+    \end{equation}
+    In (21), \(y\) is the reading of the magnetometer, \(m\) is the magnetic field of the 
+    earth in the body frame and \(w\) represents the noise in the measurement.
+      
+    \subsection{Rotations}
+
+    \subsubsection{Euler Angles}
+    Euler angles involves three angles which are used for three individual 
+    rotations around axes. To apply a rotation represented with 
+    Euler angles, first of all, the frame is rotated around the first axis 
+    by the first angle. Then, the frame is rotated around the second axis 
+    of the rotated frame by the second angle, and so on. Although Euler angles 
+    is an intuitive way to represent rotations, it may have singularity problem 
+    in some cases \cite{quat}.
+
+    \subsubsection{Rotation matrix}
+    Rotation matrices are 3x3 matrices that can be used to rotate vectors by 
+    multiplying them from left. Rotation matrix can be calculated from Euler angles 
+    in ZYX order (\(\psi\theta\phi\)) by using (22) \cite{quat}. % \psi \theta \phi
+    \begin{equation}\label{eq:22}
+        R = \begin{bmatrix}
+            cos\psi cos\theta\;\; cos\psi sin\theta sin\phi - sin\psi cos\phi\;\; cos\phi sin\theta cos\phi + sin\phi sin\phi\\
+            sin\psi cos\theta\;\; sin\psi sin\theta sin\phi + cos\psi cos\phi\;\; sin\psi sin\theta cos\phi - cos\psi sin\phi\\   
+            -sin\theta\;\; cos\theta sin\phi\;\; cos\theta cos\phi\\    
+            
+        \end{bmatrix}
+    \end{equation} 
+
+    \subsubsection{Quaternions}
+    Quaternion is an extended version of complex numbers. It involves one real 
+    scalar and three imaginary parts. To represents 3x1 vectors, we assign 
+    each element of the vector to imaginary parts and make the real part 0. 
+    The orientations can be represented as quaternions with non-zero real parts. 
+    To rotate a vector \(v\), we can use quaternion multiplication in (23).
+    \begin{equation}\label{eq:23}
+        v_{rotated} = q*v*\bar{q}
+    \end{equation}     
+    Although it is not an intuitive way to represent rotations, 
+    it is commonly used since it solves the singularity problem in Euler angles. 
+    In the rest of my summer practice, I generally used quaternions to represent the 
+    orientation of a vehicle \cite{quat}.
+
+    \subsection{Coordinate Systems}
+
+    \subsubsection{ECEF (Earth-centered, Earth-fixed)}
+    ECEF is a stationary frame with respect to the earth. The origin of the 
+    frame is the center of the earth. The X and Y axis are in the same plane 
+    with the equator. X axis passes through \(0^{\circ}\) and \(180^{\circ}\) longitude, 
+    and Y axis passes through \(90^{\circ}\) E and \(90^{\circ}\) W longitudes. 
+    Z axis passes through the poles.
+    
+    \subsubsection{LLA (Latitude Longitude Altitude)}
+    We can use the latitude, longitude, and altitude of a vehicle to represent 
+    its position in geographic coordinate system.
+    
+    \subsubsection{NED (North East Down)}
+    NED takes a point on earth as its origin. North, East, and Down are the axes 
+    of the frame in ordered way.
+
+    \subsubsection{Body frame}
+    Body frame takes the center of the vehicle or IMU as its origin. The three axes 
+    point to the front, right and down of the vehicle respectively.
+
+    \subsection{Method Description}
+    I decided to implement the model described in \cite{kok} to estimate orientation. 
+    It uses an EKF to estimate orientation. The state vector contains 
+    quaternions that rotates a point in the body frame to NED frame. The 
+    measurement vector contains accelerometer and magnetometer readings. 
+    The gyroscope readings are used as the input vector to predict future 
+    quaternions by calculating the derivative of quaternions. Derivatives of 
+    quaternions are calculated by using (24).
+    \begin{equation}\label{eq:24}
+        \frac{dq}{dt} = \frac{1}{2}q*\omega_{body}
+    \end{equation}
+    To predict future quaternions, (25) is used.
+    \begin{equation}\label{eq:25}
+        q_{k+1} = q_{k} + \Delta t\frac{dq_k}{dt}
+    \end{equation}
+    To estimate quaternions by using predicted quaternions and accelerometer 
+    and magnetometer readings, (26) and (27) are used.
+    \begin{equation}\label{eq:26}
+        [0\; 0\; 9.8]^T = q_k*y_{accelerometer}*\bar{q_k}
+    \end{equation}
+    \begin{equation}\label{eq:27}
+        m_{NED} = q_k*y_{magnetometer}*\bar{q_k}
+    \end{equation}
+    In (26), it is assumed that the acceleration of the vehicle is 
+    too small compared to the gravitational acceleration. Therefore, 
+    we can use accelerometer to measure gravitational acceleration in the body frame, 
+    and quaternions are used to rotate the reading to NED frame. 
+    In the NED frame, the accelerometer reading corresponds to gravitational 
+    acceleration which is \([0\; 0\; 9.8]^T m/s^2\). \\
+    In (27), the magnetometer reading is rotated to NED frame. 
+    It corresponds to the magnetic field of the earth in NED frame which 
+    can be obtained by using the model described in \cite{vmm}. \\
+    By using (25), (26), and (27), I decided on f and h functions and 
+    calculated their jacobian matrices.\\
+    After estimating the orientation, I used it to estimate the position. 
+    To estimate the position and the velocity, I used the Euler equations 
+    which are stated in (28) and (29).
+    \begin{equation}\label{eq:28}
+        p_{k+1} = p_k + \Delta tv_k + 1/2\Delta t^2a_k
+    \end{equation}
+    \begin{equation}\label{eq:29}
+        v_{k+1} = v_k + \Delta ta_k
+    \end{equation}
+    To obtain the acceleration in ECEF frame, first of all, I rotated 
+    the accelerometer reading from the body frame to NED frame. Then, 
+    I simply used ned2ecefv function of MATLAB to obtain acceleration 
+    in ECEF frame.
+
+    \subsection{Simulations}
+
+    \subsubsection{Simulation Environment}
+    To test the model, I created a trajectory by using waypointTrajectory 
+    object of MATLAB for a fixed-wing plane. From this trajectory, I obtained 
+    truth values of position, orientation, and other pose properties. The trajectory 
+    showed in Fig. 3.\\
+    % figure geoscatter, yaw-pitch-roll, positionNed
+
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.1geo}}
+        \caption{The generated trajectory in map.}
+    \end{figure}
+    The graphs of orientation and position of the plane are plotted in Fig. 4 and 5.
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.1orient}}
+        \caption{The graph of orientation of plane.}
+    \end{figure}
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.1position}}
+        \caption{The graph of position of plane.}
+    \end{figure}
+    
+    For these truth values, I obtained IMU readings by using imuSensor 
+    object of MATLAB. I 
+    adjusted IMU parameters as indicated in the datasheet of the product 
+    that the company will use. The graphs of generated data of IMU 
+    readings by time are plotted in Fig. 6, 7 and 8.
+    % figure y_acc y_gyro y_mag
+
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.2acc.svg}}
+        \caption{The graph of acceleration readings of IMU.}
+    \end{figure}
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.2gyro.svg}}
+        \caption{The graph of gyroscope readings of IMU.}
+    \end{figure}
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.2mag.svg}}
+        \caption{The graph of magnetometer readings of IMU.}
+    \end{figure}
+
+    
+    \subsubsection{Simulation Results}
+    To examine the results easily, I converted estimated quaternions 
+    to Euler angles in ZYX order (yaw-pitch-roll) and position estimations 
+    in ECEF frame to NED frame. The error in orientation estimation is 
+    plotted in Fig. 9. \\
+    % figure angular distance, yaw-pitch-roll
+
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.3distance.svg}}
+        \caption{The graph of error in orientation estimation.}
+    \end{figure}
+    The estimated orientations in Euler angles are plotted in Fig. 10, 11, and 12.
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.3yaw.svg}}
+        \caption{The graph of yaw angle estimations.}
+    \end{figure}
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.3pitch.svg}}
+        \caption{The graph of pitch angle estimations.}
+    \end{figure}
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.3roll.svg}}
+        \caption{The graph of roll angle estimations.}
+    \end{figure}
+
+    From the graphs, we can see that the EKF estimates the orientation 
+    with an error of less than 2.5 degrees. The error in orientation estimation 
+    increases when the acceleration of the vehicle is not too small as 
+    it violates the assumption in (26).\\
+    The position estimation is done by only integrating accelerometer 
+    readings. The estimations are not corrected by using any equation, 
+    therefore, we have a divergent error. At the point where the plane 
+    rotates to right, the orientation error is increased since the acceleration 
+    of the plane is increased which violates the assumption in (26).
+    The fact that we could not estimate orientation accurately also increases 
+    the error in position estimations since orientation estimations are used to rotate 
+    accelerometer readings and remove gravitational acceleration.\\
+    The estimated positions are shown in Fig. 13.
+    % figure geoscatter, norm(distance)
+
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.4geo.svg}}
+        \caption{The estimated positions in map.}
+    \end{figure}
+    The error in position estimations is plotted in Fig. 14.
+    \begin{figure}[H]
+        \centerline{\includesvg[inkscapelatex=false, scale=0.6]{5.4norm.svg}}
+        \caption{The graph of error in position estimation.}
+    \end{figure}
+
+    \section{Conclusion}   
+    I completed my summer practice at InterLabs in Ankara. I learned the math behind Kalman Filter 
+    and EKF. I implemented some models based on EKF. I have done many 
+    practices on MATLAB. I have also learned mathematical models to represent 
+    rotations and coordinate systems.\\ 
+    During my summer practice, I experienced how research projects are done. I also observed 
+    the development process of projects. I recommend the company 
+    to one who wants to learn how R\&D projects are maintained in the private sector.
+    
+    % I recommend the company for summer practice since the 
+    % engineers working there are kind and try to help interns to improve
+    % themselves.   
+    \newpage
+    \section{References}   
+    \bibliographystyle{ieeetr}
+    \bibliography{refs}
+
+    % rssi shue
+    % quaternion
+    % ekf ori
+    % world model
+    % ekf tutorial
+
+\end{document}
