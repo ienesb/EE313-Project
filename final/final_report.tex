@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{svg}
+\usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -68,11 +70,34 @@ Before transmitting the audio signal, we are going to add another signal namely 
 \subsection{Laser Driver}
 \section{Receiver Unit}
 \subsection{Photodiode}
+At the beginning of the receiver, we need to obtain light and convert it to a voltage signal. To do this, we decided to use the photodiode BPW34 [x] 
+since it operates at visible light. The photodiode is a device which has a current changing with light on the device, so that we can use it 
+to convert light into current. At this stage we decided to use a transimpedance amplifier to convert current to voltage. The schematic of the amplifier 
+is shown in the figure below.
+%% SCHEMATIC.
+
+
 \subsection{Low-Pass and High-Pass Filter}
 After the light signal is converted to voltage signal, we need to seperate audio signal and reference signal. We need to implement 
 a low-pass filter to obtain audio signal and a high-pass filter to obtain reference signal. We decided to use a fourth order Butterworth 
 Filter [x] for low-pass filter and second order Butterworth Filter for high-pass filter. The schematics of the filters are shown below. 
 %% SCHEMATICs
+\begin{figure}[H]
+    \centerline{\includesvg[inkscapelatex=false, scale=0.4]{lpf}}
+    \caption{The schematic of the low-pass filter}
+\end{figure}
+\begin{figure}[H]
+    \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    \caption{The schematic of the high-pass filter}
+\end{figure}
+
+
+The 4.7\(k\Omega\) and 10\(k\Omega\) resistors are for amplifying the signal. The x resistors and capacitors are used to filter the signal. 
+The cut-off frequency can be calculated by the following equation.
+\begin{equation}
+f_c = \frac{1}{2\pi RC}
+\end{equation}  
+The frequency responses of the low-pass filter are shown in the figure below.  
 
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
@@ -135,4 +160,6 @@ The simulation results are shown below.\\
 % LF351 https://www.st.com/resource/en/datasheet/lf351.pdf 
 % LM741 https://www.mouser.com/datasheet/2/405/snosc25c-261542.pdf
 % UA741 https://www.ti.com/lit/ds/symlink/ua741.pdf
+% BPW34 https://pdf.direnc.net/upload/bpw34-fotodiyot-datasheet.pdf
+% https://www.electronicshub.org/butterworth-filter/
 \end{document}
