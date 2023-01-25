@@ -10,8 +10,20 @@
 \usepackage{xcolor}
 \usepackage{svg}
 \usepackage{float}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+    pdftitle={EE300 İsmail Enes Bülbül}
+}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
 \begin{document}
 
 \title{EE 313 ANALOG ELECTRONICS LABORATORY 2022-2023 FALL TERM PROJECT REPORT \\ {\large AN OPTICAL WIRELESS COMMUNICATION SYSTEM: PHOTOPHONE}}
@@ -178,7 +190,7 @@ The cut-off frequency can be calculated by (2).
 The frequency responses of the low-pass filter are shown in the figure below. 
 %% RESULTS
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{lpf_1}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{lpf_result}}
     %\caption{The simulation result of the low-pass filter}
 %\end{figure}
 %\begin{figure}[H]
@@ -281,7 +293,7 @@ simulation results of the circuit is shown below.
   %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
     %\caption{The simulation result of the peak detector circuit}
 %\end{figure}
-From the simulation results, we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
+From the simulation results,\cite{LM741} we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
 1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
 at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
 
