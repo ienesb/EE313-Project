@@ -13,6 +13,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{dblfloatfix}
 
 \hypersetup{
     colorlinks,
@@ -309,21 +310,19 @@ In this project, we tried to satisfy the desired task by suggesting our solution
 \par Finally, the circuit schematic of the overall circuit in LTspice can be seen in Fig. x. Similarly, the constructed circuit in real-life is shown in Fig. y, below.  
 
 
-
-\begin{figure*}[ht]
-    \centering
-    \includesvg[inkscapelatex=false, scale=0.5]{all_circuit}
-    \caption{This is a wide figure that spans both columns.}
-    \label{fig:img2}
-\end{figure*}
-
-\begin{figure*}[ht]
+\begin{figure}[H] 
     \centering
     \includegraphics[scale=0.3]{all.png}
     \caption{This is a wide figure that spans both columns.}
     \label{fig:img1}
-\end{figure*}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, scale=0.5]{all_circuit}
+    \caption{This is a wide figure that spans both columns.}
+    \label{fig:img2}
+\end{figure}
 
 
 
