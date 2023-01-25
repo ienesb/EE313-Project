@@ -147,7 +147,7 @@ to convert light into current. At this stage we decided to use a transimpedance 
 is shown in the figure below.
 %% SCHEMATIC.
 %\begin{figure}[H]
-%   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_1}}
+%   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{diode}}
 %   \caption{The schematic of the photodiode driving circuit}
 %\end{figure} 
 
@@ -173,11 +173,11 @@ The cut-off frequency can be calculated by (2).
 The frequency responses of the low-pass filter are shown in the figure below. 
 %% RESULTS
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{lpf_1}}
     %\caption{The simulation result of the low-pass filter}
 %\end{figure}
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf_result}}
     %\caption{The simulation result of the high-pass filter}
 %\end{figure}
 
@@ -187,18 +187,18 @@ Similarly, 20kHz can pass from high-pass filter and low frequencies are filtered
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
 of the reference signal and it worked properly at the simulations. However, in practical case, it did not work as we expected 
-since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in [x] which is 
+since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak}[x] which is 
 shown in the figure below.
 %% SCHEMATIC
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{peak_detector}}
     %\caption{The schematic of the peak detector circuit}
 %\end{figure}
 
 The simulation results for the peak detector circuit is shown below.
 %% RESULTS
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{peak_detector_1}}
     %\caption{The simulation result of the peak detector circuit}
 %\end{figure}
 
@@ -285,6 +285,8 @@ at that current. Therefore, we could deliver a pretty less power and the audio c
 \section{Conclusion}
 
 \section*{References}
+\bibliographystyle{ieeetr}
+\bibliography{refs}
 % peak detector
 % https://www.analog.com/en/technical-articles/ltc6244-high-speed-peak-detector.html
 % LF351 https://www.st.com/resource/en/datasheet/lf351.pdf 
