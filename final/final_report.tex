@@ -72,7 +72,7 @@ The first part of the transmitter unit is microphone driver circuit. To transmit
 \subsection{Automatic Gain Control}
 The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. To achieve this, we construct the AGC circuit which can be seen in Fig. 4.
  %\begin{figure}[H]
- %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{agc_circuit}}
+ %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{agc}}
     %\caption{Automatic Gain Control circuit schematic}
 %\end{figure}
 \par In fact, the AGC circuit in Fig. 4 is a negative feddback amplifier topology. The upper part of the circuit is basically a non-inverting amplifier whereas the remaining part is feedback network. The output of the microphone driver circuit is connected to the non-inverting input of the op-amp, and it is amplified by the gain of the amplifier which is determined by the resistors connected to the inverting input (2). 
@@ -81,7 +81,7 @@ The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We 
  \end{equation}
 \par At the output of the op-amp, a diode, resistor and capacitor is connected in series. Actually, it is a basic peak detector, and it is used to detect the peak voltage value of the output of the op-amp. Here, we used 1N4148 fast diode [x] since the change in the audio signal is generally fast. Then, the output of the peak detector is used to bias the BC547 NPN transistor so that the collector current is passing through the 100 k\(\Omega\) resistor, and the voltage exists at the gate terminal of the 2N5460 JFET. Thus, as the amplitude of the input signal is changed the voltage at the gate terminal of the JFET is also changed. Also, since JFET can be used as a voltage controlled resistor, the voltage at the non-inverting of the op-amp is changed as well. So, this is how the negative feedback works in the AGC part. As a result, we get almost a constant amplitude signal at the output of the AGC regardless of the amplitude of the input signal. The simulation result of the AGC can be seen in Fig. 5 which shows output values for a 2 kHz sine wave with different amplitudes.
  %\begin{figure}[H]
- %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{agc_circuit_1}}
+ %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{new_agc_jfet}}
     %\caption{Automatic Gain Control circuit, simulation result}
 %\end{figure}
 \subsection{Low-Pass Filter}
@@ -123,7 +123,7 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
 \end{figure} 
 \par Therefore, the laser drive circuit is a transconductance amplifier whose input voltage coming from the summing amplifier, and the circuit schematic is shown in Fig. 11.
  %\begin{figure}[H]
- %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver}}
+ %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser}}
     %\caption{Laser driver circuit schematic}
 %\end{figure} 
 \par In this circuit, we utilizied the BC557 PNP transistor to construct a common-emitter amplifier with degeneration. As seen in Fig x. the light intensity of the laser is linear after some threshold current, which is also called as linear region. Thus, we want laser to operate in this region, so we need some kind of DC current offset. To achieve this, the resistors R2 and R3 is connected to the base terminal of the transistor so that the DC voltage at the base terminal is approximately equal to 7.5 V. Also, the simulation result of the DC operating point of the transistor can be seen in Fig. 12. 
@@ -133,7 +133,7 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
 \end{figure} 
 \par It can be seen from Fig. 12 that DC current of the collector terminal, Ic(Q1) \(\thickapprox \) 30 mA. This value is enough to operate the laser in linear region. In this topology we feed our signal from base terminal of the transistor, so we have a better small signal range. Also, we connected a degeneration resistor at emitter terminal of the transistor. Although the degeneration resistor decreases the gain, it improves small-signal range and provides staility to circuitry. Also, we connected 220 \(\Omega\) reisstor to the collector terminal because the maximum allowed operating voltage of the laser is about 6V otherwise it may be damaged. The simulation result of the laser driver cirucit is shown in Fig. 13.  
  %\begin{figure}[H]
- %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_1}}
+ %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_new_1}}
     %\caption{Laser driver circuit, simulation result}
 %\end{figure} 
 \section{Receiver Unit}
