@@ -280,7 +280,7 @@ to adjust the tone of the colors.
 \subsection{Audio Amplifier}
 \par We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
 the speaker to the output of the low-pass filter. Therefore, we need to implement a power amplifier circuit. The circuit schematic of the power 
-amplifier is shown in Fig. 25. 
+amplifier is shown in Fig. 25.  Here, we used a class B audio amplifier circuit which contains BC547 NPN and BC557 PNP transistor.  Also, there is a 10 k\(\Omega\) potentiometer connected to the inverting input of the op-amp, and it is used to change the gain of the amplifier. Thus, by changing it, we can also control the volume of the speaker. 
 %% SCHEMATIC
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{speaker}}
