@@ -209,15 +209,13 @@ Similarly, 20kHz can pass through high-pass filter and low frequency components 
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
 of the reference signal and it worked properly at the simulations. However, in practical case, it did not work as we expected 
-since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak} which is 
-shown in the figure below.
+since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak}, and it can be seen in Fig. 21, below.
 %% SCHEMATIC
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{peak_detector}}
     \caption{The circuit schematic of the peak detector circuit}
 \end{figure}
-
-The simulation results for the peak detector circuit is shown below.
+\par Also, the simulation result for the peak detector circuit is shown in Fig. 22.
 %% RESULTS
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{peak_detector_1}}
