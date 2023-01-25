@@ -56,7 +56,7 @@ Component not allowed to be used: audio op-amps, microphone with integrated driv
 \subsection{Microphone Driver}
 The first part of the transmitter unit is microphone driver circuit. To transmit an audio signal using a laser, we need to detect this audio signal first. Therefore, to do this we used an electret microphone. It requires a biasing voltage to operate. Thus, we biased the microphone by connecting the positive terminal of it to the 1 k\(\Omega\) resistor. However, since the output voltage of the microphone is quite low, we cannot directly connect it to the rest of the circuit. In order to use this output, first, we should amplify it with a non-inverting amplifier circuit as shown in Fig. 2. 
  %\begin{figure}[H]
- %   \centerline{\includepdf[inkscapelatex=false, scale=0.4]{microphone}}
+ %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{microphone}}
     %\caption{Microphone driver circuit schematic}
 %\end{figure}
  \par There is a 10 k\(\Omega\) potentiometer connected between ground and the inverting input of the amplifier so that by changing its value, the gain can be adjusted, and the amplitude of the output signal is changed. The gain of the topology can be found by the following expression (1).
