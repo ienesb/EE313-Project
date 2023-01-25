@@ -125,11 +125,16 @@ Before transmitting the audio signal, we are going to add another signal namely 
 \begin{equation}\label{eq:3}
          V_{out} = -\frac{R_3}{R_1} \mbox{(Audio\textunderscore signal)} - \frac{R_3}{R_2} \mbox{(Reference\textunderscore signal)}
  \end{equation}
- \par The simulation result of the summing amplifier in LTspice is shown in Fig. 9.
+ \par The simulation result of the summing amplifier in LTspice is shown in Fig. 9. Also, the experimental result of the summing amplifier when we played 1 kHz sine tone from mobile phone can be seen in Fig. 10. From the figures, we can conclude that the transmitter unit from beginning to summing amplifier ouput works 
+ quite well.  
   %\begin{figure}[H]
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{summing_amplifier_1}}
     %\caption{Summing amplifier, simulation result}
 %\end{figure} 
+ \begin{figure}[H]
+   \centerline{\includegraphics[scale=0.13]{summing.png}}
+    \caption{Summing amplifier circuit, experimental result}
+\end{figure} 
  \par In the summing amplifier circuit, we did not use a regular op-amp such as LM741 or UA741. Since we are working with high frequencies, we had to use an opamp with higher slew-rate for better response. Thus, we used an LF351 \cite{LF351} opamp which has a slew rate of 16V/\(\mu\)s whereas LM741 \cite{LM741} and UA741 \cite{uA741} op-amps has a slew rate of 0.5V/\(\mu\)s.
 \subsection{Laser Driver}
 At the transmitter unit, we need to convert the electrical signal to modulated light signal. To achieve this, we decided to use a laser rather than infrared or visible light LEDs because the visible light LEDs are very sensitive to the environmental noise whereas the infrared LEDs are not observable by naked eye so that it is hard to check whether the system works properly. \\ 
@@ -153,8 +158,6 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_new_1}}
     %\caption{Laser driver circuit, simulation result}
 %\end{figure} 
-
-
 
 \section{Receiver Unit}
 \subsection{Photodiode}
@@ -184,7 +187,7 @@ Filter \cite{butterworth} for low-pass filter and second order Butterworth Filte
 %\end{figure}
 
 
-The 4.7\(k\Omega\) and 10\(k\Omega\) resistors are for amplifying the signal. The 33\(k\omega\) resistors and capacitors are used to filter the signal. 
+The 4.7 k\(\Omega\) and 10 k\(\Omega\) resistors are for amplifying the signal. The 33 k\(\Omega\) resistors and capacitors are used to filter the signal. 
 The cut-off frequency can be calculated by (2).
 
 The frequency responses of the low-pass filter are shown in the figure below. 
