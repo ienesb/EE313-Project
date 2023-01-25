@@ -12,6 +12,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{graphicx}
 
 \hypersetup{
     colorlinks,
@@ -306,6 +307,27 @@ In this project, we tried to satisfy the desired task by suggesting our solution
 \par  One of the most important factors when constructing a circuit is to learn the characteristic and technical specification of the components that are used in the circuit by examining their datasheets. For example, in our AGC unit, we did not achieve to get a constant amplitude audio signal at first, but by considering the technical details of 1N4007 we could reveal the issue easily, and we solved it by using another diode with smaller recovery time. \\
 \par Also, we encountered many problems throughout the project, and we spent a lot of time trying to find the cause of these problems. Although this situation seems to be negative in a sense, in fact, as an engineer, we gained experience about what kind of method should be followed to tackle the problem in our enginnering life. However, since we could not allocate enough time for the project because of the final week, we did not implement each part of it. \\
 \par Finally, the circuit schematic of the overall circuit in LTspice can be seen in Fig. x. Similarly, the constructed circuit in real-life is shown in Fig. y, below.  
+
+
+
+\begin{figure*}[ht]
+    \centering
+    \includesvg[inkscapelatex=false, scale=0.5]{all_circuit}
+    \caption{This is a wide figure that spans both columns.}
+    \label{fig:img2}
+\end{figure*}
+
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[scale=0.3]{all.png}
+    \caption{This is a wide figure that spans both columns.}
+    \label{fig:img1}
+\end{figure*}
+
+
+
+
+
 \bibliographystyle{ieeetr}
 \bibliography{refs}
 % peak detector
