@@ -141,22 +141,22 @@ Before transmitting the audio signal, we are going to add another signal namely 
  \par In the summing amplifier circuit, we did not use a regular op-amp such as LM741 or UA741. Since we are working with high frequencies, we had to use an opamp with higher slew-rate for better response. Thus, we used an LF351 \cite{LF351} opamp which has a slew rate of 16V/\(\mu\)s whereas LM741 \cite{LM741} and UA741 \cite{uA741} op-amps has a slew rate of 0.5V/\(\mu\)s.
 \subsection{Laser Driver}
 At the transmitter unit, we need to convert the electrical signal to modulated light signal. To achieve this, we decided to use a laser rather than infrared or visible light LEDs because the visible light LEDs are very sensitive to the environmental noise whereas the infrared LEDs are not observable by naked eye so that it is hard to check whether the system works properly. \\ 
-\par The light intensity of lasers is somewhat linearly dependent on the current, not the voltage as it can be seen from Fig. 10.
+\par The light intensity of lasers is somewhat linearly dependent on the current, not the voltage as it can be seen from Fig. 12.
  \begin{figure}[H]
    \centerline{\includegraphics[scale=0.5]{laser.png}}
     \caption{Current–light intensity characteristics of typical laser diode}
 \end{figure} 
-\par Therefore, the laser drive circuit is a transconductance amplifier whose input voltage coming from the summing amplifier, and the circuit schematic is shown in Fig. 11.
+\par Therefore, the laser drive circuit is a transconductance amplifier whose input voltage coming from the summing amplifier, and the circuit schematic is shown in Fig. 13.
  \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{laser}}
     \caption{Laser driver circuit schematic}
 \end{figure} 
-\par In this circuit, we utilizied the BC557 PNP transistor to construct a common-emitter amplifier with degeneration. As seen in Fig x. the light intensity of the laser is linear after some threshold current, which is also called as linear region. Thus, we want laser to operate in this region, so we need some kind of DC current offset. To achieve this, the resistors R2 and R3 is connected to the base terminal of the transistor so that the DC voltage at the base terminal is approximately equal to 7.5 V. Also, the simulation result of the DC operating point of the transistor can be seen in Fig. 12. 
+\par In this circuit, we utilizied the BC557 PNP transistor to construct a common-emitter amplifier with degeneration. As seen in Fig. 12 the light intensity of the laser is linear after some threshold current, which is also called as linear region. Thus, we want laser to operate in this region, so we need some kind of DC current offset. To achieve this, the resistors R2 and R3 is connected to the base terminal of the transistor so that the DC voltage at the base terminal is approximately equal to 7.5 V. Also, the simulation result of the DC operating point of the transistor can be seen in Fig. 14. 
  \begin{figure}[H]
    \centerline{\includegraphics[scale=0.5]{DC_operating.png}}
     \caption{DC operating point of the transistor, simulation result}
 \end{figure} 
-\par It can be seen from Fig. 12 that DC current of the collector terminal, Ic(Q1) \(\thickapprox \) 30 mA. This value is enough to operate the laser in linear region. In this topology we feed our signal from base terminal of the transistor, so we have a better small signal range. Also, we connected a degeneration resistor at emitter terminal of the transistor. Although the degeneration resistor decreases the gain, it improves small-signal range and provides staility to circuitry. Also, we connected 220 \(\Omega\) reisstor to the collector terminal because the maximum allowed operating voltage of the laser is about 6V otherwise it may be damaged. The simulation result of the laser driver cirucit is shown in Fig. 13.  
+\par It can be seen from Fig. 14 that DC current of the collector terminal, Ic(Q1) \(\thickapprox \) 30 mA. This value is enough to operate the laser in linear region. In this topology, we feed our signal from base terminal of the transistor, so we have a better small signal range. Also, we connected a degeneration resistor at emitter terminal of the transistor. Although the degeneration resistor decreases the gain, it improves small-signal range and provides staility to circuitry. Also, we connected 220 \(\Omega\) resistor to the collector terminal because the maximum allowed operating voltage of the laser is about 6V otherwise it may be damaged. The simulation result of the laser driver circuit is shown in Fig. 15.  
  \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{laser_driver_new_1}}
     \caption{Laser driver circuit, simulation result}
@@ -167,7 +167,7 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
 At the beginning of the receiver, we need to obtain light and convert it to a voltage signal. To do this, we decided to use the BPW34 photodiode \cite{BPW34} 
 since it operates at visible light. The photodiode is a device which has a current changing with light on the device, so that we can use it 
 to convert light into current. At this stage we decided to use a transimpedance amplifier to convert current to voltage. The schematic of the amplifier 
-is shown in the figure below.
+is shown in Fig. 16, below.
 %% SCHEMATIC.
 \begin{figure}[H]
   \centerline{\includesvg[inkscapelatex=false, scale=0.25]{diode}}
@@ -176,9 +176,9 @@ is shown in the figure below.
 
 
 \subsection{Low-Pass and High-Pass Filter}
-After the light signal is converted to voltage signal, we need to seperate audio signal and reference signal. We need to implement 
-a low-pass filter to obtain audio signal and a high-pass filter to obtain reference signal. We decided to use a fourth order Butterworth 
-Filter \cite{butterworth} for low-pass filter and second order Butterworth Filter for high-pass filter. The schematics of the filters are shown below. 
+After the light signal is converted to voltage signal, we need to seperate the audio and the reference signal. We need to implement 
+a low-pass filter to obtain the audio signal and a high-pass filter to obtain the reference signal. We decided to use 4\(^{th}\) order Butterworth 
+Filter \cite{butterworth} for low-pass filter and 2\(^{nd}\) order Butterworth Filter for high-pass filter. The schematics of the filters are shown in Fig. 17 and Fig. 18, below. 
 %% SCHEMATICs
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{lpf}}
@@ -191,9 +191,9 @@ Filter \cite{butterworth} for low-pass filter and second order Butterworth Filte
 
 
 The 4.7 k\(\Omega\) and 10 k\(\Omega\) resistors are for amplifying the signal. The 33 k\(\Omega\) resistors and capacitors are used to filter the signal. 
-The cut-off frequency can be calculated by (2).
+The cut-off frequency can be calculated by (3).
 
-The frequency responses of the low-pass filter are shown in the figure below. 
+The frequency responses of the filters are shown in Fig. 19 and Fig. 20, below. 
 %% RESULTS
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{lpf_result}}
@@ -204,8 +204,8 @@ The frequency responses of the low-pass filter are shown in the figure below.
     \caption{The simulation result of the high-pass filter}
 \end{figure}
 
-From the frequency responses obtained in the simulation, we can see that low-pass filter has a bandwidth includes 300Hz-3.4kHz and filters 20kHz. 
-Similarly, 20kHz can pass from high-pass filter and low frequencies are filtered. 
+From the frequency responses obtained in the simulation, we can see that low-pass filter has a bandwidth that includes 300Hz-3.4kHz and filters 20kHz. 
+Similarly, 20kHz can pass through high-pass filter and low frequency components are filtered. 
 
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
