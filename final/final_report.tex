@@ -96,7 +96,7 @@ The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We 
 \begin{equation}\label{eq:2}
         Gain, A_v = \frac{R_7+R_8}{R_7} 
  \end{equation}
-\par At the output of the op-amp, a diode, resistor and capacitor is connected in series. Actually, it is a basic peak detector, and it is used to detect the peak voltage value of the output of the op-amp. Here, we used 1N4148 fast diode [x] since the change in the audio signal is generally fast. Then, the output of the peak detector is used to bias the BC547 NPN transistor so that the collector current is passing through the 100 k\(\Omega\) resistor, and the voltage exists at the gate terminal of the 2N5460 JFET. Thus, as the amplitude of the input signal is changed the voltage at the gate terminal of the JFET is also changed. Also, since JFET can be used as a voltage controlled resistor, the voltage at the non-inverting of the op-amp is changed as well. So, this is how the negative feedback works in the AGC part. As a result, we get almost a constant amplitude signal at the output of the AGC regardless of the amplitude of the input signal. The simulation result of the AGC can be seen in Fig. 5 which shows output values for a 2 kHz sine wave with different amplitudes.
+\par At the output of the op-amp, a diode, resistor and capacitor is connected in series. Actually, it is a basic peak detector, and it is used to detect the peak voltage value of the output of the op-amp. Here, we used 1N4148 fast diode \cite{1N4148} since the change in the audio signal is generally fast. Then, the output of the peak detector is used to bias the BC547 NPN transistor so that the collector current is passing through the 100 k\(\Omega\) resistor, and the voltage exists at the gate terminal of the 2N5460 JFET. Thus, as the amplitude of the input signal is changed the voltage at the gate terminal of the JFET is also changed. Also, since JFET can be used as a voltage controlled resistor, the voltage at the non-inverting of the op-amp is changed as well. So, this is how the negative feedback works in the AGC part. As a result, we get almost a constant amplitude signal at the output of the AGC regardless of the amplitude of the input signal. The simulation result of the AGC can be seen in Fig. 5 which shows output values for a 2 kHz sine wave with different amplitudes.
  %\begin{figure}[H]
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{new_agc_jfet}}
     %\caption{Automatic Gain Control circuit, simulation result}
@@ -130,7 +130,7 @@ Before transmitting the audio signal, we are going to add another signal namely 
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{summing_amplifier_1}}
     %\caption{Summing amplifier, simulation result}
 %\end{figure} 
- \par In the summing amplifier circuit, we did not use a regular op-amp such as LM741 or UA741. Since we are working with high frequencies, we had to use an opamp with higher slew-rate for better response. Thus, we used an LF351 opamp which has a slew rate of 16V/\(\mu\)s [x] whereas LM741 and UA741 op-amps has a slew rate of 0.5V/\(\mu\)s [x][x].
+ \par In the summing amplifier circuit, we did not use a regular op-amp such as LM741 or UA741. Since we are working with high frequencies, we had to use an opamp with higher slew-rate for better response. Thus, we used an LF351 \cite{LF351} opamp which has a slew rate of 16V/\(\mu\)s whereas LM741 \cite{LM741} and UA741 \cite{uA741} op-amps has a slew rate of 0.5V/\(\mu\)s.
 \subsection{Laser Driver}
 At the transmitter unit, we need to convert the electrical signal to modulated light signal. To achieve this, we decided to use a laser rather than infrared or visible light LEDs because the visible light LEDs are very sensitive to the environmental noise whereas the infrared LEDs are not observable by naked eye so that it is hard to check whether the system works properly. \\ 
 \par The light intensity of lasers is somewhat linearly dependent on the current, not the voltage as it can be seen from Fig. 10.
@@ -158,7 +158,7 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
 
 \section{Receiver Unit}
 \subsection{Photodiode}
-At the beginning of the receiver, we need to obtain light and convert it to a voltage signal. To do this, we decided to use the BPW34 photodiode [x] 
+At the beginning of the receiver, we need to obtain light and convert it to a voltage signal. To do this, we decided to use the BPW34 photodiode \cite{BPW34} 
 since it operates at visible light. The photodiode is a device which has a current changing with light on the device, so that we can use it 
 to convert light into current. At this stage we decided to use a transimpedance amplifier to convert current to voltage. The schematic of the amplifier 
 is shown in the figure below.
@@ -172,7 +172,7 @@ is shown in the figure below.
 \subsection{Low-Pass and High-Pass Filter}
 After the light signal is converted to voltage signal, we need to seperate audio signal and reference signal. We need to implement 
 a low-pass filter to obtain audio signal and a high-pass filter to obtain reference signal. We decided to use a fourth order Butterworth 
-Filter [x] for low-pass filter and second order Butterworth Filter for high-pass filter. The schematics of the filters are shown below. 
+Filter \cite{butterworth} for low-pass filter and second order Butterworth Filter for high-pass filter. The schematics of the filters are shown below. 
 %% SCHEMATICs
 %\begin{figure}[H]
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{lpf}}
@@ -204,7 +204,7 @@ Similarly, 20kHz can pass from high-pass filter and low frequencies are filtered
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
 of the reference signal and it worked properly at the simulations. However, in practical case, it did not work as we expected 
-since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak}[x] which is 
+since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak} which is 
 shown in the figure below.
 %% SCHEMATIC
 %\begin{figure}[H]
@@ -293,7 +293,7 @@ simulation results of the circuit is shown below.
   %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
     %\caption{The simulation result of the peak detector circuit}
 %\end{figure}
-From the simulation results,\cite{LM741} we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
+From the simulation results, we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
 1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
 at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
 
