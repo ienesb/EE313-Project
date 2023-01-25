@@ -11,6 +11,7 @@
 \usepackage{svg}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{url}
 
 \hypersetup{
     colorlinks,
@@ -270,11 +271,12 @@ to adjust the tone of the colors.
 
 \par The simulation results are shown below.
 %% RESULTS
-%\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
-    %\caption{The simulation result of the peak detector circuit}
-%\end{figure}
-\par From the results, we can see that for signals with different amplitude, we have different colors displayed on RGP led.
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.4]{wcr.png}}
+     \caption{Window comparator, experimental result}
+ \end{figure} 
+\par From the results, we can see that for signals with different amplitude, we can see that the the red color (Vr) can be displayed at 
+a specific voltage range. Therefore, we can say that the circuit is able to display 4 distinct colors for different voltge ranges. 
 
 \subsection{Audio Amplifier}
 We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
@@ -282,7 +284,7 @@ the speaker to the output of the low-pass filter. Therefore we need to implement
 amplifier is shown below. 
 %% SCHEMATIC
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{speaker}}
     %\caption{The schematic of the peak detector circuit}
 %\end{figure}
 We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
@@ -293,11 +295,11 @@ We use a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (x), 
 simulation results of the circuit is shown below. 
 %% SIM RESULTS
 %\begin{figure}[H]
-  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{speaker_result}}
     %\caption{The simulation result of the peak detector circuit}
 %\end{figure}
-From the simulation results, we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
-1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
+From the simulation results, we can see that the output is a sinusoidal voltage with an amplitude greater than 4V. Therefore, we can say that the circuit can deliver 
+1W power to the speaker. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
 at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
 
 
