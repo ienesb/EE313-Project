@@ -210,22 +210,20 @@ Similarly, 20kHz can pass through high-pass filter and low frequency components 
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
 of the reference signal and it worked properly at the simulations. However, in practical case, it did not work as we expected 
-since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak} which is 
-shown in the figure below.
+since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in \cite{peak}, and it can be seen in Fig. 21, below.
 %% SCHEMATIC
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{peak_detector}}
     \caption{The circuit schematic of the peak detector circuit}
 \end{figure}
-
-The simulation results for the peak detector circuit is shown below.
+\par Also, the simulation result for the peak detector circuit is shown in Fig. 22.
 %% RESULTS
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{peak_detector_1}}
     \caption{The simulation result of the peak detector circuit}
 \end{figure}
 
-From the results, we can see that the circuit is able to get amplitude of the referance signal with high frequency.
+From the results, we can see that the circuit is able to get amplitude of the high frequency reference signal.
 
 \subsection{Signal Level Indicator}
 We are expected to design a circuit to represent received signal level with a single RGB led. Chosen colors for 
@@ -251,18 +249,18 @@ each case are shown in Table 1, below.
     \label{tab1}
     \end{center}
 \end{table}
-\par The overall schematic of the signal level indicator circuit is shown below.
+\par The overall schematic of the signal level indicator circuit can be seen in Fig. 23, below.
 % SCHEMATIC
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{window_comparator}}
     \caption{The circuit schematic of the signal level indicator}
 \end{figure}
-\par At first, we used 5 resistors connected in serial between Vcc and ground to divide Vcc into four different voltages 
-to determine regions for each signal level case. 
-Then four comparator is used to determine at which region the amplitude of the reference signal is. When the amplitude 
+\par At first, we used 5 resistors connected in series between Vcc and ground to divide Vcc into four different voltage values
+to determine the regions for each signal level case. 
+Then, four comparators are used to determine at which region the amplitude of the reference signal is. When the amplitude 
 is at the first region, all comparators will have negative output and no color will be displayed. When the amplitude 
-is at the second and third region, the first and the second comparator will have a positive output and red and yellow 
-color will be displayed respectively. The output of the third comparator is substracted from the output of the first 
+is at the second and third region, the first and the second comparator will have a positive output, so red and yellow 
+colors will be displayed respectively. The output of the third comparator is substracted from the output of the first 
 comparator by the difference amplifier so that the red pin will be turned off when the signal is at the fourth region 
 and green color will be displayed. Similarly, the output of the last comparator is substracted from the output of the 
 second comparator so that the green pin will be turned off and blue color will be displayed when the amplitude is at the 
@@ -271,56 +269,54 @@ last region.
 \par We used common anode RGB led so that the led has a common ground pin. We used different resistors for each color pin of the led 
 to adjust the tone of the colors. 
 
-\par The simulation results are shown below.
+\par The simulation results for the circuit are shown in Fig. 24. 
 %% RESULTS
 \begin{figure}[H]
     \centerline{\includegraphics[scale=0.4]{wcr.png}}
      \caption{Window comparator, experimental result}
  \end{figure} 
-\par From the results, we can see that for signals with different amplitude, we can see that the the red color (Vr) can be displayed at 
-a specific voltage range. Therefore, we can say that the circuit is able to display 4 distinct colors for different voltage ranges. 
+\par From the results, it can be stated that input signal is applied with four different amplitude values, and we can see that the the red color (Vr) can be displayed at a specific voltage range. Therefore, we can say that the circuit is able to display 4 distinct colors for different voltage ranges. 
 
 \subsection{Audio Amplifier}
 \par We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
-the speaker to the output of the low-pass filter. Therefore, we need to implement a power amplifier circuit. The schematic of the power 
-amplifier is shown below. 
+the speaker to the output of the low-pass filter. Therefore, we need to implement a power amplifier circuit. The circuit schematic of the power 
+amplifier is shown in Fig. 25.  Here, we used a class B audio amplifier circuit which contains BC547 NPN and BC557 PNP transistor.  Also, there is a 10 k\(\Omega\) potentiometer connected to the inverting input of the op-amp, and it is used to change the gain of the amplifier. Thus, by changing it, we can also control the volume of the speaker. 
 %% SCHEMATIC
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{speaker}}
     \caption{The circuit schematic of the audio amplifier}
 \end{figure}
-\par We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
+\par We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (5).
 \begin{equation}
     P = \frac{V^2}{R}
 \end{equation}
-\par We use a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (x), the output of the signal should be at least 8 Vpp. The 
-simulation results of the circuit is shown below. 
+\par We used a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (5), it can be concluded that the output of the power amplifier should be at least 8 Vpp. The simulation result of the power amplifier circuit is shown in Fig. 26. 
 %% SIM RESULTS
 \begin{figure}[H]
    \centerline{\includesvg[inkscapelatex=false, scale=0.25]{speaker_result}}
     \caption{The simulation result of the audio amplifier}
 \end{figure}
 \par From the simulation results, we can see that a sinusoidal signal with 4.5V amplitude. Therefore, we can say that the circuit can deliver 
-1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
-at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
+1W power to the speaker. In practice, however, our circuit is not worked as we expected since the BJTs that we used have a current limit and they burned 
+at that current value. Therefore, we could deliver a pretty less power, and the audio can be heard from much small distance. 
 \section{Conclusion}
 In this project, we tried to satisfy the desired task by suggesting our solution with circuit representations and their simulation results in LTspice. During the project we tried to put the knowledge that we learned in EE313 and EE311 courses, into practice. However, sometimes it is not sufficient to solve problems based on our prior knowledge so that it necessary to do research to solve problems. Thus, we also learned how to do research and implement something that we found by considering our requirement. \\
 \par  One of the most important factors when constructing a circuit is to learn the characteristic and technical specification of the components that are used in the circuit by examining their datasheets. For example, in our AGC unit, we did not achieve to get a constant amplitude audio signal at first, but by considering the technical details of 1N4007 we could reveal the issue easily, and we solved it by using another diode with smaller recovery time. \\
 \par Also, we encountered many problems throughout the project, and we spent a lot of time trying to find the cause of these problems. Although this situation seems to be negative in a sense, in fact, as an engineer, we gained experience about what kind of method should be followed to tackle the problem in our enginnering life. However, since we could not allocate enough time for the project because of the final week, we did not implement each part of it. \\
-\par Finally, the circuit schematic of the overall circuit in LTspice can be seen in Fig. x. Similarly, the constructed circuit in real-life is shown in Fig. y, below.  
+\par Finally, the constructed circuit in real-life can be seen in Fig. 27. Similarly, the circuit schematic of the overall circuit in LTspice is shown in Fig. 28, below.  
 
 
 \begin{figure}[H] 
     \centering
     \includegraphics[scale=0.3]{all.png}
-    \caption{This is a wide figure that spans both columns.}
+    \caption{The constructed circuit in real-life}
     \label{fig:img1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includesvg[inkscapelatex=false, scale=0.5]{all_circuit}
-    \caption{This is a wide figure that spans both columns.}
+    \caption{The overall circuit schematic in LTspice}
     \label{fig:img2}
 \end{figure}
 
