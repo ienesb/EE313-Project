@@ -55,12 +55,17 @@ There is a 10 k\(\Omega\) potentiometer connected between ground and the inverti
 \par Also, the simulation result of the input-output characteristics of the microphone driving circuit in LTspice is given in Figure 3 when R\(_4\) = 10k\(\Omega\). \\ \par
 After non-inverting amplifier circuit, we connected a buffer circuit so that the microphone driver will not be affected from the rest of the circuit. 
 \subsection{Automatic Gain Control}
-The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. To achieve this, we construct the AGC circuit which can be seen in Figure 4.
+The second sub-unit of the transmitter part is Automatic Gain Control (AGC). We should adjust the output signal of the microphone driver circuit because the output of the microphone is distance and frequency dependent, so the output amplitude of the microphone change with time as well as distance of the speaker (person) to it. Therefore, as it is stated in project definition, we need an automatic gain controller that controls gain and adjusts the amplitude of the microphone signal so that we will get a relatively constant amplitude audio signal at the output of the AGC regardless of the amplitude of the input signal. To achieve this, we construct the AGC circuit which can be seen in Figure 4. \\
+\par In fact, the AGC circuit in Figure 4 is a negative feddback amplifier topology. The upper part of the circuit is basically a non-inverting amplifier whereas the remaining part is feedback network. The output of the microphone driver circuit is connected to the non-inverting input of the op-amp, and it is amplified by the gain of the amplifier which is determined by the resistors connected to the inverting input (2). 
+\begin{equation}\label{eq:2}
+        Gain, A_v = \frac{R_7+R_8}{R_7} 
+ \end{equation}
+\par At the output of the op-amp, a diode, resistor and capacitor is connected in series. Actually, it is a basic peak detector, and it is used to detect the peak voltage value of the output of the op-amp. Here, we used 1N4148 fast diode [x] since the change in the audio signal is generally fast. Then, the output of the peak detector is used to bias the BC547 NPN transistor so that the collector current is passing through the 100 kilo ohm resistor, and the voltage exists at the gate terminal of the 2N5460 JFET. Thus, as the amplitude of the input signal is changed the voltage at the gate terminal of the JFET is also changed. Also, since JFET can be used as a voltage controlled resistor, the voltage at the non-inverting of the op-amp is changed as well. So, this is how the negative feedback works in the AGC part. As a result, we get almost a constant amplitude signal at the output of the AGC regardless of the amplitude of the input signal.  
 \subsection{Low-Pass Filter}
 \subsection{Summing Amplifier}
 Before transmitting the audio signal, we are going to add another signal namely reference signal so that at the receiver side, the amplitude of this signal will be treated as the measure of signal strength since it is constant. To sum up these two signals, we used a basic summing amplifier circuit which can be seen in Figure x. \\
 \par For the summing amplifier the output expression can be given as by the following equation (2). The output voltage has \(180^\circ\) phase shift since the audio and reference signals are given from the inverting input of the op-amp.  
-\begin{equation}\label{eq:2}
+\begin{equation}\label{eq:3}
          V_{out} = -\frac{R_3}{R_1} \mbox{(Audio\textunderscore signal)} - \frac{R_3}{R_2} \mbox{(Reference\textunderscore signal)}
  \end{equation}
  \par The simulation result of the summing amplifier in LTspice is shown in Figure x. \\
@@ -135,4 +140,5 @@ The simulation results are shown below.\\
 % LF351 https://www.st.com/resource/en/datasheet/lf351.pdf 
 % LM741 https://www.mouser.com/datasheet/2/405/snosc25c-261542.pdf
 % UA741 https://www.ti.com/lit/ds/symlink/ua741.pdf
+% 1N4148 https://www.vishay.com/docs/81857/1n4148.pdf 
 \end{document}
