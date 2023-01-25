@@ -136,6 +136,9 @@ At the transmitter unit, we need to convert the electrical signal to modulated l
  %   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_1}}
     %\caption{Laser driver circuit, simulation result}
 %\end{figure} 
+
+
+
 \section{Receiver Unit}
 \subsection{Photodiode}
 At the beginning of the receiver, we need to obtain light and convert it to a voltage signal. To do this, we decided to use the BPW34 photodiode [x] 
@@ -143,6 +146,10 @@ since it operates at visible light. The photodiode is a device which has a curre
 to convert light into current. At this stage we decided to use a transimpedance amplifier to convert current to voltage. The schematic of the amplifier 
 is shown in the figure below.
 %% SCHEMATIC.
+%\begin{figure}[H]
+%   \centerline{\includesvg[inkscapelatex=false, scale=0.4]{laser_driver_1}}
+%   \caption{The schematic of the photodiode driving circuit}
+%\end{figure} 
 
 
 \subsection{Low-Pass and High-Pass Filter}
@@ -160,21 +167,43 @@ Filter [x] for low-pass filter and second order Butterworth Filter for high-pass
 %\end{figure}
 
 
-The 4.7\(k\Omega\) and 10\(k\Omega\) resistors are for amplifying the signal. The x resistors and capacitors are used to filter the signal. 
-The cut-off frequency can be calculated by the following equation.
-\begin{equation}
-f_c = \frac{1}{2\pi RC}
-\end{equation}  
-The frequency responses of the low-pass filter are shown in the figure below.  
+The 4.7\(k\Omega\) and 10\(k\Omega\) resistors are for amplifying the signal. The 33\(k\omega\) resistors and capacitors are used to filter the signal. 
+The cut-off frequency can be calculated by (2).
+
+The frequency responses of the low-pass filter are shown in the figure below. 
+%% RESULTS
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The simulation result of the low-pass filter}
+%\end{figure}
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The simulation result of the high-pass filter}
+%\end{figure}
+
+From the frequency responses obtained in the simulation, we can see that low-pass filter has a bandwidth includes 300Hz-3.4kHz and filters 20kHz. 
+Similarly, 20kHz can pass from high-pass filter and low frequencies are filtered. 
 
 \subsection{Improved Peak Detector}
 At the proposal report, we decided to use a simple circuit with one diode and one capacitor to obtain the amplitude 
 of the reference signal and it worked properly at the simulations. However, in practical case, it did not work as we expected 
 since the frequency (20kHz) of the signal is too high. Therefore, we changed our design and used the circuit shown in [x] which is 
-shown in the figure below. \\
+shown in the figure below.
 %% SCHEMATIC
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The schematic of the peak detector circuit}
+%\end{figure}
+
 The simulation results for the peak detector circuit is shown below.
 %% RESULTS
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The simulation result of the peak detector circuit}
+%\end{figure}
+
+From the results, we can see that the circuit is able to get amplitude of the referance signal with high frequency.
+
 \subsection{Signal Level Indicator}
 We are expected to design a circuit to represent received signal level with a single RGB led. Chosen colors for 
 each case are shown in the table below.
@@ -199,8 +228,12 @@ each case are shown in the table below.
     \label{tab1}
     \end{center}
 \end{table}
-The overall schematic of the signal level indicator circuit is shown below. \\
+The overall schematic of the signal level indicator circuit is shown below.
 % SCHEMATIC
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The schematic of the peak detector circuit}
+%\end{figure}
 \par At first, we used 5 resistors connected in serial between Vcc and ground to divide Vcc into four different voltages 
 to determine regions for each signal level case. 
 Then four comparator is used to determine at which region the amplitude of the reference signal is. When the amplitude 
@@ -210,18 +243,28 @@ color will be displayed respectively. The output of the third comparator is subs
 comparator by the difference amplifier so that the red pin will be turned off when the signal is at the fourth region 
 and green color will be displayed. Similarly, the output of the last comparator is substracted from the output of the 
 second comparator so that the green pin will be turned off and blue color will be displayed when the amplitude is at the 
-last region. \\
+last region.
 
 \par We used common anode RGB led so that the led has a common ground pin. We used different resistors for each color pin of the led 
-to adjust the tone of the colors. \\ 
+to adjust the tone of the colors. 
 
-\par The simulation results are shown below.\\
+\par The simulation results are shown below.
 %% RESULTS
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The simulation result of the peak detector circuit}
+%\end{figure}
+\par From the results, we can see that for signals with different amplitude, we have different colors displayed on RGP led.
+
 \subsection{Audio Amplifier}
 We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
 the speaker to the output of the low-pass filter. Therefore we need to implement a power amplifier circuit. The schematic of the power 
 amplifier is shown below. 
 %% SCHEMATIC
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The schematic of the peak detector circuit}
+%\end{figure}
 We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
 \begin{equation}
     P = \frac{V^2}{R}
@@ -229,6 +272,10 @@ We are expected to deliver at least 5W power to the speaker. The power of the sp
 We use a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (x), the output of the signal should be at least 8 Vpp. The 
 simulation results of the circuit is shown below. 
 %% SIM RESULTS
+%\begin{figure}[H]
+  %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{hpf}}
+    %\caption{The simulation result of the peak detector circuit}
+%\end{figure}
 From the simulation results, we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
 1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
 at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
