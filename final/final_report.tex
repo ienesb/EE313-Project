@@ -249,7 +249,7 @@ each case are shown in the table below.
     \label{tab1}
     \end{center}
 \end{table}
-The overall schematic of the signal level indicator circuit is shown below.
+\par The overall schematic of the signal level indicator circuit is shown below.
 % SCHEMATIC
 %\begin{figure}[H]
   %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{window_comparator}}
@@ -279,33 +279,33 @@ to adjust the tone of the colors.
 a specific voltage range. Therefore, we can say that the circuit is able to display 4 distinct colors for different voltge ranges. 
 
 \subsection{Audio Amplifier}
-We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
-the speaker to the output of the low-pass filter. Therefore we need to implement a power amplifier circuit. The schematic of the power 
+\par We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
+the speaker to the output of the low-pass filter. Therefore, we need to implement a power amplifier circuit. The schematic of the power 
 amplifier is shown below. 
 %% SCHEMATIC
 %\begin{figure}[H]
   %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{speaker}}
     %\caption{The schematic of the peak detector circuit}
 %\end{figure}
-We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
+\par We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
 \begin{equation}
     P = \frac{V^2}{R}
 \end{equation}
-We use a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (x), the output of the signal should be at least 8 Vpp. The 
+\par We use a speaker which has 8 \(\Omega\) internal resistance. Therefore, by (x), the output of the signal should be at least 8 Vpp. The 
 simulation results of the circuit is shown below. 
 %% SIM RESULTS
 %\begin{figure}[H]
   %  \centerline{\includesvg[inkscapelatex=false, scale=0.4]{speaker_result}}
     %\caption{The simulation result of the peak detector circuit}
 %\end{figure}
-From the simulation results, we can see that the output is a sinusoidal voltage with an amplitude greater than 4V. Therefore, we can say that the circuit can deliver 
-1W power to the speaker. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
+\par From the simulation results, we can see that a sinusoidal signal with 4.5V amplitude. Therefore, we can say that the circuit can deliver 
+1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
 at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
-
-
-
 \section{Conclusion}
-
+In this project, we tried to satisfy the desired task by suggesting our solution with circuit representations and their simulation results in LTspice. During the project we tried to put the knowledge that we learned in EE313 and EE311 courses, into practice. However, sometimes it is not sufficient to solve problems based on our prior knowledge so that it necessary to do research to solve problems. Thus, we also learned how to do research and implement something that we found by considering our requirement. \\
+\par  One of the most important factors when constructing a circuit is to learn the characteristic and technical specification of the components that are used in the circuit by examining their datasheets. For example, in our AGC unit, we did not achieve to get a constant amplitude audio signal at first, but by considering the technical details of 1N4007 we could reveal the issue easily, and we solved it by using another diode with smaller recovery time. \\
+\par Also, we encountered many problems throughout the project, and we spent a lot of time trying to find the cause of these problems. Although this situation seems to be negative in a sense, in fact, as an engineer, we gained experience about what kind of method should be followed to tackle the problem in our enginnering life. However, since we could not allocate enough time for the project because of the final week, we did not implement each part of it. \\
+\par Finally, the circuit schematic of the overall circuit in LTspice can be seen in Fig. x. Similarly, the constructed circuit in real-life is shown in Fig. y, below.  
 \bibliographystyle{ieeetr}
 \bibliography{refs}
 % peak detector
