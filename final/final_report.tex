@@ -159,6 +159,21 @@ to adjust the tone of the colors. \\
 \par The simulation results are shown below.\\
 %% RESULTS
 \subsection{Audio Amplifier}
+We obtained the audio signal at the output of the low-pass filter. But since it has a high output resistance, we cannot directly connect 
+the speaker to the output of the low-pass filter. Therefore we need to implement a power amplifier circuit. The schematic of the power 
+amplifier is shown below. 
+%% SCHEMATIC
+We are expected to deliver at least 5W power to the speaker. The power of the speaker can be calculated by (x)
+\begin{equation}
+    P = \frac{V^2}{R}
+\end{equation}
+We use a speaker which has 8 \(\omega\) internal resistance. Therefore, by (x), the output of the signal should be at least 8 Vpp. The 
+simulation results of the circuit is shown below. 
+%% SIM RESULTS
+From the simulation results, we can see that a sinusoidal signal with 4V amplitude. Therefore, we can say that the circuit can deliver 
+1W power to the spekaer. In practice, however, our circuit is not worked as we expected since the BJTs we use has a current limit and burn 
+at that current. Therefore, we could deliver a pretty less power and the audio can be heard from much small distance. 
+
 
 
 \section{Conclusion}
